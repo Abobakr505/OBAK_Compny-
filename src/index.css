@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+
+@font-face {
+
+    font-family: GraphicSchool-Regular;
+
+    src: url(/GraphicSchool-Regular.ttf);
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+font-family: "IBM Plex Sans Arabic", sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+::selection {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 dark:bg-dark-700 hover:bg-gray-300 dark:hover:bg-dark-600 text-gray-800 dark:text-white px-6 py-3 rounded-lg font-medium transition-all duration-300;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-dark-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-dark-700;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-300 dark:border-dark-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-dark-700 text-gray-900 dark:text-white transition-all duration-300;
+  }
+}
+
+
+.logo{
+
+  font-family: 'GraphicSchool-Regular' , sans-serif;
+
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #f59e0b 0%, #c77d00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.nav-link {
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-link::after {
+  content: "";
+  --tw-text-opacity: 1;
+  position: absolute;
+  width: 0;
+  height: 2.5px;
+  bottom: -3px; /* المسافة بين النص والخط */
+  left: 0; /* يبدأ من اليمين (مع RTL) */
+  background-color: #f59e0b; /* استبدل بلون teeverse أو لون آخر */
+  transition: width 0.3s ease-in-out; /* أنيميشن سلس للعرض */
+  border-radius: 2px; /* حواف مستديرة للخط */
+}
+
+.nav-link:hover::after {
+  width: 100%; /* يمتد الخط ليغطي كامل عرض النص */
+  right: 0; /* ينتهي عند اليسار */
+  left: auto; /* إلغاء right لضمان الاتجاه الصحيح */
+}
+
+.bracket{
+  font-family: 'Tiny5', sans-serif;
+  font-size: 1.5rem;
+}
