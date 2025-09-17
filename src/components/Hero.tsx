@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Sparkles, Shield, Truck, } from 'lucide-react';
+import { ArrowLeft, Sparkles, Shield, Truck, Mail, } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
@@ -68,9 +68,10 @@ const Hero: React.FC = () => {
               </Link>
               <Link
                 to="/contact"
-                className="btn-secondary"
+                className="btn-secondary hover:scale-105 transition-transform duration-200 flex items-center justify-center space-x-2 space-x-reverse gap-2"
               >
                 تواصل معنا
+                <Mail size={20} />
               </Link>
             </motion.div>
 

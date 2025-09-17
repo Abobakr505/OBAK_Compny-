@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, Minus, Trash2, MessageCircle, AlertCircle, MailCheck } from 'lucide-react';
+import { X, Plus, Minus, Trash2, AlertCircle, MailCheck } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';

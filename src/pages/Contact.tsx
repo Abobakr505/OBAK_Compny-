@@ -7,9 +7,7 @@ const Contact = () => {
     email: '',
     phone: '',
     service: '',
-    budget: '',
     message: '',
-    timeline: ''
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -180,7 +178,20 @@ const Contact = () => {
                         className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
                         required
                       />
+                    </div><div>
+                      <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">رقم الهاتف</label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
+                      />
                     </div>
+                    
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                     <div>
                       <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">البريد الإلكتروني *</label>
                       <input
@@ -191,72 +202,6 @@ const Contact = () => {
                         className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
                         required
                       />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">رقم الهاتف</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">نوع الخدمة *</label>
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-                        required
-                      >
-                        <option value="" className="">اختر الخدمة</option>
-                        <option value="video-production" className="">إنتاج الفيديو</option>
-                        <option value="editing" className="">المونتاج والتحرير</option>
-                        <option value="motion-graphics" className="">الموشن جرافيك</option>
-                        <option value="photography" className="">التصوير الفوتوغرافي</option>
-                        <option value="audio" className="">الهندسة الصوتية</option>
-                        <option value="interactive" className="">المحتوى التفاعلي</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">الميزانية المتوقعة</label>
-                      <select
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-                      >
-                        <option value="" className="">اختر الميزانية</option>
-                        <option value="under-5k" className="">أقل من 5,000 ريال</option>
-                        <option value="5k-10k" className="">5,000 - 10,000 ريال</option>
-                        <option value="10k-25k" className="">10,000 - 25,000 ريال</option>
-                        <option value="25k-50k" className="">25,000 - 50,000 ريال</option>
-                        <option value="over-50k" className="">أكثر من 50,000 ريال</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">الإطار الزمني</label>
-                      <select
-                        name="timeline"
-                        value={formData.timeline}
-                        onChange={handleChange}
-                        className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
-                      >
-                        <option value="" className="">اختر الإطار الزمني</option>
-                        <option value="urgent" className="">عاجل (أقل من أسبوع)</option>
-                        <option value="1-2weeks" className="">1-2 أسبوع</option>
-                        <option value="2-4weeks" className="">2-4 أسابيع</option>
-                        <option value="1-2months" className="">1-2 شهر</option>
-                        <option value="flexible" className="">مرن</option>
-                      </select>
                     </div>
                   </div>
 
