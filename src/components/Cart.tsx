@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Plus, Minus, Trash2, MessageCircle, AlertCircle } from 'lucide-react';
+import { X, Plus, Minus, Trash2, MessageCircle, AlertCircle, MailCheck } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
@@ -33,29 +33,39 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
     });
     return;
   }
+// جمع المجموع الكلي
+const totalAmount = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
 
-  const messages = [
-    {
-      serviceId: 'service_tgzd2om',
-      templateId: 'template_40ru0ik',
-      recipient: customerEmail,
-      params: {
-        name: 'عميل',
-        total: total.toFixed(2),
-        items: items.map((i, idx) => `${idx + 1}. ${i.product.name} - ${i.quantity} × ${i.product.price} ر.س`).join('\n'),
-      }
-    },
-    {
-      serviceId: 'service_q9eftm9',
-      templateId: 'template_vk16gzo',
-      recipient: 'abobakrhasan5335@gmail.com',
-      params: {
-        name: 'مندوب',
-        total: total.toFixed(2),
-        items: items.map((i, idx) => `${idx + 1}. ${i.product.name} - ${i.quantity} × ${i.product.price} ر.س`).join('\n'),
-      }
-    },
-  ];
+// إنشاء نص تفاصيل الطلب مع المجموع الكلي في النهاية
+const orderDetails = items
+  .map((i, idx) =>
+    `${idx + 1}. ${i.product.name}\n   السعر: ${i.product.price} ر.س\n   الكمية: ${i.quantity}\n   المجموع: ${(i.product.price * i.quantity).toFixed(2)} ر.س\n----------------------`
+  )
+  .join('\n') + `\nالمجموع الكلي: ${totalAmount.toFixed(2)} ر.س`;
+
+
+const messages = [
+  {
+    serviceId: 'service_tgzd2om',
+    templateId: 'template_40ru0ik',
+    recipient: customerEmail,
+    params: {
+      name: 'عميل',
+      total: total.toFixed(2),
+      order_details: orderDetails, // لازم يتطابق مع اسم المتغير في القالب
+    }
+  },
+  {
+    serviceId: 'service_q9eftm9',
+    templateId: 'template_vk16gzo',
+    recipient: 'abobakrhasan5335@gmail.com',
+    params: {
+      name: 'مندوب',
+      total: total.toFixed(2),
+      order_details: orderDetails, // نفس الشيء هنا
+    }
+  },
+];
 
   try {
     for (const msg of messages) {
@@ -211,10 +221,11 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setShowConfirmModal(true)}
-                    className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-lg font-medium flex items-center justify-center space-x-2 space-x-reverse transition-colors"
+                    className="w-full bg-primary-500 hover:bg-primary-600 text-white py-3 rounded-lg font-medium flex items-center justify-center space-x-2 space-x-reverse transition-colors"
                   >
-                    <MessageCircle size={20} />
+                    
                     <span>إرسال الطلب عبر البريد</span>
+                    <MailCheck size={20} />
                   </motion.button>
 
                   <motion.button
@@ -267,7 +278,7 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
                       value={customerEmail}
                       onChange={(e) => setCustomerEmail(e.target.value)}
                       placeholder="example@mail.com"
-                      className="w-full border rounded-lg p-2 text-center dark:bg-dark-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                      className="w-full border rounded-lg p-2 text-center dark:bg-dark-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
 
                     <div className="flex justify-center gap-4 pt-4">
@@ -282,7 +293,7 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
                         disabled={!customerEmail}
                         whileTap={{ scale: customerEmail ? 0.95 : 1 }}
                         className={`px-4 py-2 rounded-lg text-white ${
-                          customerEmail ? "bg-green-500 hover:bg-green-600" : "bg-gray-400 cursor-not-allowed"
+                          customerEmail ? "bg-primary-500 hover:bg-primary-600" : "bg-gray-400 cursor-not-allowed"
                         }`}
                       >
                         تأكيد

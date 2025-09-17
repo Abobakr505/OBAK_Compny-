@@ -33,7 +33,7 @@ const ProductDetailsPage: React.FC = () => {
         position="top-center"
         toastOptions={{
           style: {
-            background: '#1f2937',
+            background: '#f59e0b',
             color: '#fff',
             fontWeight: 'bold',
             fontSize: '16px',
