@@ -12,26 +12,30 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
   const { items, updateQuantity, removeFromCart, total, clearCart } = useCart();
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [customerNumber, setCustomerNumber] = useState('');
 
   const sendWhatsAppMessage = () => {
-    if (items.length === 0) return;
+    if (items.length === 0 || !customerNumber) return;
 
-    // رسالة الطلب
-    let message = 'مرحباً، أريد طلب المنتجات التالية:\n\n';
+    // رسالة الطلب بتنسيق أفضل
+    let message = `🛒 *تفاصيل الطلب*\n\n`;
     items.forEach((item, index) => {
-      message += `${index + 1}. ${item.product.name}\n`;
+      message += `• *${index + 1}. ${item.product.name}*\n`;
       message += `   الكمية: ${item.quantity}\n`;
       message += `   السعر: ${item.product.price} ر.س\n`;
       message += `   المجموع: ${item.product.price * item.quantity} ر.س\n\n`;
     });
-    message += `إجمالي الطلب: ${total.toFixed(2)} ر.س\n\n`;
-    message += 'شكراً لكم';
+    message += `━━━━━━━━━━━━━━━\n`;
+    message += `💰 *إجمالي الطلب:* ${total.toFixed(2)} ر.س\n`;
+    message += `📞 *رقم العميل:* ${customerNumber}\n`;
+    message += `━━━━━━━━━━━━━━━\n`;
+    message += `شكراً لتسوقك معنا 🌹`;
 
     // أرقام الواتساب (عميل + مندوب + مدير)
     const phoneNumbers = [
-      '966500000000', // العميل
-      '966511111111', // المندوب
-      '966522222222', // المدير
+      customerNumber,     // العميل
+      '201093954137',     // المندوب
+      '966522222222',     // المدير
     ];
 
     const encodedMessage = encodeURIComponent(message);
@@ -188,55 +192,68 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
             </div>
           </motion.div>
 
-         {/* Confirm Modal */}
-<AnimatePresence>
-  {showConfirmModal && (
-    <>
-      {/* خلفية شفافة */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black bg-opacity-50 z-50"
-        onClick={() => setShowConfirmModal(false)}
-      />
+          {/* Confirm Modal */}
+          <AnimatePresence>
+            {showConfirmModal && (
+              <>
+                {/* خلفية شفافة */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 bg-black bg-opacity-50 z-50"
+                  onClick={() => setShowConfirmModal(false)}
+                />
 
-      {/* نافذة التأكيد */}
-      <motion.div
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-        className="fixed inset-0 flex items-center justify-center z-50"
-      >
-        <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-lg max-w-sm w-full p-6 space-y-4 text-center">
-          <AlertCircle size={40} className="mx-auto text-yellow-500" />
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-            تأكيد الإرسال
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400">
-            هل أنت متأكد أنك تريد إرسال الطلب عبر واتساب؟
-          </p>
-          <div className="flex justify-center gap-4 pt-4">
-            <button
-              onClick={() => setShowConfirmModal(false)}
-              className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-dark-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-dark-600"
-            >
-              إلغاء
-            </button>
-            <button
-              onClick={sendWhatsAppMessage}
-              className="px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600"
-            >
-              تأكيد
-            </button>
-          </div>
-        </div>
-      </motion.div>
-    </>
-  )}
-</AnimatePresence>
+                {/* نافذة التأكيد */}
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.8, opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="fixed inset-0 flex items-center justify-center z-50"
+                >
+                  <div className="bg-white dark:bg-dark-800 rounded-2xl shadow-lg max-w-sm w-full p-6 space-y-4 text-center">
+                    <AlertCircle size={40} className="mx-auto text-yellow-500" />
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                      تأكيد الإرسال
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400">
+                      أدخل رقم واتساب الخاص بك لتلقي تفاصيل الطلب:
+                    </p>
 
+                    <input
+                      type="tel"
+                      value={customerNumber}
+                      onChange={(e) => setCustomerNumber(e.target.value)}
+                      placeholder="مثال: 966500000000"
+                      className="w-full border rounded-lg p-2 text-center  dark:bg-dark-700 dark:text-white  focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+
+                    <div className="flex justify-center gap-4 pt-4">
+                      <button
+                        onClick={() => setShowConfirmModal(false)}
+                        className="px-4 py-2 rounded-lg bg-gray-200 dark:bg-dark-700 text-gray-800 dark:text-white hover:bg-gray-300 dark:hover:bg-dark-600"
+                      >
+                        إلغاء
+                      </button>
+                      <button
+                        onClick={sendWhatsAppMessage}
+                        disabled={!customerNumber}
+                        className={`px-4 py-2 rounded-lg text-white ${
+                          customerNumber
+                            ? "bg-green-500 hover:bg-green-600"
+                            : "bg-gray-400 cursor-not-allowed"
+                        }`}
+                      >
+                        تأكيد
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
         </>
       )}
     </AnimatePresence>
