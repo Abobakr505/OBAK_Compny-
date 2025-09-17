@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Sparkles, Shield, Truck, MailCheck } from 'lucide-react';
+import { ArrowLeft, Sparkles, Shield, Truck, } from 'lucide-react';
 
 const Hero: React.FC = () => {
   return (

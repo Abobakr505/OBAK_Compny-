@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { X, LogIn, LogOut, Package, Users, BarChart3 } from 'lucide-react';
+import { LogIn, LogOut, Package, Users, BarChart3 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const AdminPanel: React.FC = () => {
@@ -8,7 +8,7 @@ const AdminPanel: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [, setActiveTab] = useState('dashboard');
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();

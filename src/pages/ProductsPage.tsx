@@ -1,6 +1,5 @@
 // src/pages/ProductsPage.tsx
 import React from "react";
-import { motion } from "framer-motion";
 import ProductGrid from "../components/ProductGrid";
 
 const ProductsPage: React.FC = () => {

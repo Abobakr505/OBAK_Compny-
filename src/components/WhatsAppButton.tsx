@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Headset,
   X,
   Sparkles as SparklesIcon,
-  BriefcaseBusiness
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa6";
 
@@ -19,13 +18,13 @@ export function WhatsAppButton() {
 
   const iconVariants = {
     hidden: { opacity: 0, scale: 0.5, y: 10 },
-    visible: (i) => ({
+    visible: (i: number) => ({
       opacity: 1,
       scale: 1,
       y: 0,
       transition: {
         delay: i * 0.1 + 0.1,
-        type: "spring",
+        type: "spring" as "spring",
         stiffness: 300,
         damping: 20,
       },

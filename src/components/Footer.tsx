@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, MessageCircle, Heart, Youtube } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook, Instagram, Heart, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { FaTiktok } from 'react-icons/fa6';
 

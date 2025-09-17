@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, Menu, X, Sun, Moon, Home, Box, Info, Phone } from "lucide-react";
+import { ShoppingCart, Menu, X, Sun, Moon, Home, Box, Phone } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 import { useCart } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
 
 interface HeaderProps {
   onCartClick: () => void;
-  onAdminClick: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
@@ -29,10 +28,10 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
       x: 0,
       opacity: 1,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 80,
         damping: 20,
-        when: "beforeChildren",
+        when: "beforeChildren" as const,
         staggerChildren: 0.12,
       },
     },

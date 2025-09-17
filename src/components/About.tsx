@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Users, Award, Target, Heart, TrendingUp, Shield, CheckCircle, Star } from 'lucide-react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import { motion, useInView, useAnimation, easeOut, backOut } from 'framer-motion';
 import { useEffect } from 'react';
 
 const About = () => {
@@ -16,30 +16,30 @@ const About = () => {
   const valuesControls = useAnimation();
   const statsControls = useAnimation();
 
-  const contentInView = useInView(contentRef, { triggerOnce: false, threshold: 0.2 });
-  const imageInView = useInView(imageRef, { triggerOnce: false, threshold: 0.2 });
-  const valuesInView = useInView(valuesRef, { triggerOnce: false, threshold: 0.2 });
-  const statsInView = useInView(statsRef, { triggerOnce: false, threshold: 0.2 });
+  const contentInView = useInView(contentRef, { amount: 0.2 });
+  const imageInView = useInView(imageRef, { amount: 0.2 });
+  const valuesInView = useInView(valuesRef, { amount: 0.2 });
+  const statsInView = useInView(statsRef, { amount: 0.2 });
 
   // Animation variants
   const contentVariants = {
     hidden: { x: -100, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { duration: 1, ease: 'easeOut' } }
+    visible: { x: 0, opacity: 1, transition: { duration: 1, ease: easeOut } }
   };
 
   const imageVariants = {
     hidden: { x: 100, opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { duration: 1, ease: 'easeOut' } }
+    visible: { x: 0, opacity: 1, transition: { duration: 1, ease: easeOut } }
   };
 
   const valueVariants = {
     hidden: { y: 80, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: 'easeOut' } }
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: easeOut } }
   };
 
   const statVariants = {
     hidden: { scale: 0, opacity: 0 },
-    visible: { scale: 1, opacity: 1, transition: { duration: 0.6, ease: 'backOut' } }
+    visible: { scale: 1, opacity: 1, transition: { duration: 0.6, ease: backOut } }
   };
 
   // Trigger animations based on inView status
@@ -262,7 +262,8 @@ const About = () => {
                     className={`h-full bg-gradient-to-r ${value.color} rounded-full`}
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: valuesInView ? 1 : 0 }}
-                    transition={{ duration: 0.5, ease: 'easeOut', originX: 0 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
+
                   ></motion.div>
                 </div>
               </motion.div>

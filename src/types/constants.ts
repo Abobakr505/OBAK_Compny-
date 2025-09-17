@@ -1,4 +1,4 @@
-import { ServiceCategory } from '../lib/types';
+import type { ServiceCategory } from '../lib/types';
 
 export const WHATSAPP_NUMBER = "+15551234567"; // Replace with actual WhatsApp number
 

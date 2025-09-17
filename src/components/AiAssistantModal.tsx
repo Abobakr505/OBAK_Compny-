@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Chat, GoogleGenAI } from "@google/genai";
-import { ChatMessage } from '../lib/types';
+import type { ChatMessage } from '../lib/types';
 import { SERVICES_DATA } from './../types/constants';
 import { X, SendIcon, SparklesIcon } from 'lucide-react';
 
