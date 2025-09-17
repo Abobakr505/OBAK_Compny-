@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Sparkles, Shield, Truck, } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   return (
@@ -48,8 +49,7 @@ const Hero: React.FC = () => {
               transition={{ delay: 0.4 }}
               className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
             >
-              نوفر لك أجود أنواع خامات التشطيب من بلاط وسيراميك ورخام وجرانيت وباركيه
-              وجميع مستلزمات التشطيب بأفضل الأسعار وأعلى جودة
+              نوفر لك أفخم خامات التشطيب وجميع المستلزمات التي تبحث عنها، لنمنحك تشطيبًا متكاملًا يجمع بين الجودة العالية والسعر المناسب.
             </motion.p>
 
             <motion.div
@@ -59,23 +59,19 @@ const Hero: React.FC = () => {
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
             >
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+                to="/products"
                 className="btn-primary flex items-center justify-center space-x-2 space-x-reverse"
-                onClick={() => location.href = '/products'}
                 >
                 <span>تسوق الآن</span>
                 <ArrowLeft size={20} />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              </Link>
+              <Link
+                to="/contact"
                 className="btn-secondary"
-                onClick={() => location.href = '/contect'}
               >
                 تواصل معنا
-              </motion.button>
+              </Link>
             </motion.div>
 
             {/* Features */}
@@ -126,7 +122,7 @@ const Hero: React.FC = () => {
           >
             <div className="relative z-0">
               <img
-                src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg"
+                src="/home.jpg"
                 alt="خامات التشطيب"
                 className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl "
               />

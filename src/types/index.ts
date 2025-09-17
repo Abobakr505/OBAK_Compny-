@@ -1,18 +1,22 @@
 export interface Product {
   id: string;
   name: string;
-  description: string;
+  description: string; // الوصف القصير
+  longDescription?: string; // الوصف الطويل (اختياري)
   price: number;
   image: string;
   category: string;
   inStock: boolean;
   rating: number;
   reviews: number;
+  variants?: string[]; // الأنواع أو الخيارات المتاحة للمنتج
+  features?: string[]; // قائمة المميزات
 }
 
 export interface CartItem {
   product: Product;
   quantity: number;
+  variant?: string; // أضفنا النوع هنا
 }
 
 export interface User {

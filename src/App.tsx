@@ -16,6 +16,7 @@ import About from './components/About';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 import LatestProducts from './components/LatestProducts';
 import { WhatsAppButton } from './components/WhatsAppButton';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -35,6 +36,22 @@ function App() {
                 transition={{ duration: 0.5 }}
                 className="flex-1"
               >
+                        {/* Toaster مركزي لجميع التطبيق */}
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            style: {
+              background: '#f59e0b',
+              color: '#fff',
+              fontWeight: 'bold',
+              fontSize: '16px',
+              padding: '16px 24px',
+              borderRadius: '12px',
+              textAlign: 'center'
+            }
+          }}
+        />
+
                 <Routes>
                   {/* الصفحة الرئيسية */}
                   <Route path="/" element={<><Hero /><LatestProducts /> <About/> <FAQ/> </>} />

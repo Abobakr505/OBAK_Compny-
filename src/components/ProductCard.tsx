@@ -4,6 +4,7 @@ import { Star, ShoppingCart, Eye } from "lucide-react";
 import type { Product } from "../types";
 import { useCart } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 interface ProductCardProps {
   product: Product;
@@ -15,6 +16,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
 
   const handleAddToCart = () => {
     addToCart(product);
+    toast.success(`تمت إضافة ${product.name} للسلة`);
   };
 
   return (
@@ -33,7 +35,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
           className="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-110"
         />
 
-        {/* زر المعاينة مع الرابط على الصورة كلها */}
+        {/* زر المعاينة */}
         <Link
           to={`/product/${product.id}`}
           className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-500 flex items-center justify-center z-10"
@@ -83,7 +85,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
         {/* السعر + زر الإضافة */}
         <div className="flex items-center justify-between">
           <div className="text-2xl font-bold text-primary-600 dark:text-primary-400">
-            {product.price} ر.س
+            {product.price} ج.م
           </div>
           <motion.button
             whileHover={{ scale: 1.08 }}

@@ -4,131 +4,110 @@ export const WHATSAPP_NUMBER = "+15551234567"; // Replace with actual WhatsApp n
 
 export const SERVICES_DATA: ServiceCategory[] = [
   {
-    category: 'تطوير الويب',
+    category: 'بلاط وسيراميك',
     items: [
       {
-        name: 'موقع ويب أساسي',
-        description: 'تصميم وتطوير موقع ويب بسيط باستخدام HTML، CSS، وJavaScript.',
-        price: '5000 SAR',
-        image: 'https://picsum.photos/seed/basic-website/400/300',
-        tags: ['الأكثر طلباً'],
-        timeline: '2-4 أسابيع',
-        features: ['صفحات ثابتة', 'تصميم سريع الاستجابة', 'تحسين SEO أساسي']
+        name: 'بلاط سيراميك فاخر',
+        description: 'بلاط سيراميك عالي الجودة مقاوم للماء والخدوش، مناسب للأرضيات والجدران.',
+        price: '45 ج.م',
+        image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
+        tags: ['الأكثر مبيعاً'],
+        timeline: 'متاح',
+        features: ['مقاوم للماء', 'تحمل عالي', 'سهل التنظيف']
       },
       {
-        name: 'موقع ويب ديناميكي',
-        description: 'تطوير موقع ويب متقدم باستخدام React أو Vue مع قاعدة بيانات.',
-        price: '15000 SAR',
-        image: 'https://picsum.photos/seed/dynamic-website/400/300',
-        tags: ['متقدم'],
-        timeline: '4-8 أسابيع',
-        features: ['إدارة المحتوى', 'تكامل API', 'أمان متقدم']
-      },
-      {
-        name: 'تطبيق ويب مخصص',
-        description: 'بناء تطبيق ويب كامل حسب احتياجات العميل مع ميزات متقدمة.',
-        price: '30000 SAR',
-        image: 'https://picsum.photos/seed/custom-web-app/400/300',
-        tags: ['مخصص'],
-        timeline: '8-12 أسبوع',
-        features: ['واجهة مستخدم مخصصة', 'قواعد بيانات معقدة', 'تكامل مع أنظمة خارجية']
-      },
+        name: 'رخام كرارا إيطالي',
+        description: 'رخام كرارا الإيطالي الأصلي، مثالي للمطابخ والحمامات الفاخرة.',
+        price: '120 ج.م',
+        image: 'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg',
+        tags: ['مميز'],
+        timeline: 'متاح',
+        features: ['جودة عالية', 'مظهر فاخر', 'سهل التثبيت']
+      }
     ]
   },
   {
-    category: 'تطوير التطبيقات المحمولة',
+    category: 'أرضيات خشبية',
     items: [
       {
-        name: 'تطبيق Android أساسي',
-        description: 'تطوير تطبيق أندرويد بسيط باستخدام Kotlin أو Java.',
-        price: '10000 SAR',
-        image: 'https://picsum.photos/seed/android-app/400/300',
-        tags: ['الأكثر طلباً'],
-        timeline: '3-6 أسابيع',
-        features: ['واجهة بسيطة', 'تكامل مع الجهاز', 'نشر على Google Play']
-      },
-      {
-        name: 'تطبيق iOS أساسي',
-        description: 'تطوير تطبيق آيفون بسيط باستخدام Swift.',
-        price: '12000 SAR',
-        image: 'https://picsum.photos/seed/ios-app/400/300',
-        tags: ['متقدم'],
-        timeline: '3-6 أسابيع',
-        features: ['واجهة بسيطة', 'تكامل مع iOS', 'نشر على App Store']
-      },
-      {
-        name: 'تطبيق هجين (Cross-Platform)',
-        description: 'تطوير تطبيق يعمل على Android وiOS باستخدام Flutter أو React Native.',
-        price: '20000 SAR',
-        image: 'https://picsum.photos/seed/hybrid-app/400/300',
-        tags: ['فعال'],
-        timeline: '5-10 أسابيع',
-        features: ['كود مشترك', 'أداء عالي', 'نشر على كلا المنصتين']
-      },
+        name: 'باركيه خشب البلوط',
+        description: 'باركيه خشب البلوط الطبيعي، مقاوم للرطوبة ومعالج ضد الحشرات.',
+        price: '85 ج.م',
+        image: 'https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg',
+        tags: ['الأكثر مبيعاً'],
+        timeline: 'متاح',
+        features: ['مقاوم للرطوبة', 'سهل التركيب', 'جودة ممتازة']
+      }
     ]
   },
   {
-    category: 'تصميم UI/UX',
+    category: 'دهانات وألوان',
     items: [
       {
-        name: 'تصميم واجهة مستخدم أساسي',
-        description: 'تصميم UI بسيط باستخدام Figma أو Adobe XD.',
-        price: '4000 SAR',
-        image: 'https://picsum.photos/seed/ui-design/400/300',
-        tags: ['الأكثر طلباً'],
-        timeline: '1-2 أسابيع',
-        features: ['رسومات أساسية', 'نماذج أولية', 'تعديلات محدودة']
-      },
-      {
-        name: 'تصميم تجربة مستخدم كاملة',
-        description: 'تصميم UX/UI شامل مع بحث مستخدم واختبارات.',
-        price: '8000 SAR',
-        image: 'https://picsum.photos/seed/ux-design/400/300',
-        tags: ['شامل'],
-        timeline: '2-4 أسابيع',
-        features: ['بحث مستخدم', 'نماذج تفاعلية', 'تحسينات مستمرة']
-      },
-      {
-        name: 'إعادة تصميم تطبيق موجود',
-        description: 'تحديث وإعادة تصميم UI/UX لتطبيق أو موقع موجود.',
-        price: '6000 SAR',
-        image: 'https://picsum.photos/seed/redesign/400/300',
-        tags: ['تحديث'],
-        timeline: '2-3 أسابيع',
-        features: ['تحليل الحالي', 'تصميم جديد', 'اختبارات']
-      },
+        name: 'دهان جوتن فاخر',
+        description: 'دهان جوتن عالي الجودة، مقاوم للبقع وسهل التنظيف.',
+        price: '35 ج.م',
+        image: 'https://images.pexels.com/photos/1571471/pexels-photo-1571471.jpeg',
+        tags: ['الأكثر مبيعاً', 'مستمر'],
+        timeline: 'متاح',
+        features: ['سهل التنظيف', 'ألوان ثابتة', 'مقاوم للبقع']
+      }
     ]
   },
   {
-    category: 'خدمات أخرى',
+    category: 'إضاءة وكهرباء',
     items: [
       {
-        name: 'صيانة ودعم فني',
-        description: 'خدمات صيانة شهرية للمواقع والتطبيقات.',
-        price: '2000 SAR/شهر',
-        image: 'https://picsum.photos/seed/maintenance/400/300',
-        tags: ['مستمر'],
-        timeline: 'شهري',
-        features: ['تحديثات أمنية', 'إصلاح أخطاء', 'دعم 24/7']
-      },
+        name: 'إضاءة LED ذكية',
+        description: 'إضاءة LED ذكية قابلة للتحكم عن بعد مع تغيير الألوان.',
+        price: '65 ج.م',
+        image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
+        tags: ['الأكثر مبيعاً'],
+        timeline: 'متاح',
+        features: ['تغيير الألوان', 'تحكم عن بعد', 'توفير الطاقة']
+      }
+    ]
+  },
+  {
+    category: 'عوازل',
+    items: [
       {
-        name: 'تكامل API',
-        description: 'تكامل مع خدمات خارجية مثل الدفع أو الخرائط.',
-        price: '5000 SAR',
-        image: 'https://picsum.photos/seed/api-integration/400/300',
-        tags: ['تقني'],
-        timeline: '1-3 أسابيع',
-        features: ['تكامل آمن', 'اختبارات', 'وثائق']
-      },
+        name: 'عازل حراري متطور',
+        description: 'عازل حراري عالي الكفاءة، يوفر في استهلاك الطاقة.',
+        price: '55 ج.م',
+        image: 'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg',
+        tags: ['مميز'],
+        timeline: 'متاح',
+        features: ['توفير الطاقة', 'سهل التركيب', 'عمر طويل']
+      }
+    ]
+  },
+  {
+    category: 'ورق جدران',
+    items: [
       {
-        name: 'تطوير برمجيات مخصصة',
-        description: 'حلول برمجية مخصصة للأعمال الكبيرة.',
-        price: '50000 SAR+',
-        image: 'https://picsum.photos/seed/custom-software/400/300',
-        tags: ['مخصص'],
-        timeline: '3-6 أشهر',
-        features: ['تحليل احتياجات', 'تطوير كامل', 'تدريب']
-      },
+        name: 'ورق جدران ثلاثي الأبعاد',
+        description: 'ورق جدران ثلاثي الأبعاد مقاوم للرطوبة وسهل التركيب.',
+        price: '25 ج.م',
+        image: 'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg',
+        tags: ['جديد'],
+        timeline: 'متاح',
+        features: ['تصميم ثلاثي الأبعاد', 'سهل التركيب', 'مقاوم للرطوبة']
+      }
+    ]
+  },
+  {
+    category: 'أدوات صحية',
+    items: [
+      {
+        name: 'صنابير نحاس فاخرة',
+        description: 'صنابير نحاس عالية الجودة مقاومة للصدأ والتآكل.',
+        price: '95 ج.م',
+        image: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
+        tags: ['نفد المخزون'],
+        timeline: 'غير متاح',
+        features: ['مقاومة الصدأ', 'تصميم فاخر', 'جودة عالية']
+      }
     ]
   }
 ];

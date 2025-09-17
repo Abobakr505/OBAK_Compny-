@@ -30,7 +30,7 @@ const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ onClose }) => {
         }
         const ai = new GoogleGenAI({ apiKey });
 
-        const systemInstruction = `You are a friendly and knowledgeable AI assistant for 'يسرها' software company. Your goal is to help customers with their service choices. Answer questions about features, prices, recommendations, and options based ONLY on the provided services data. Your answers must be in Arabic. Do not invent items. Be concise and helpful. Here is the services data in JSON format: ${JSON.stringify(SERVICES_DATA)}`;
+        const systemInstruction = `You are a friendly and knowledgeable AI assistant for 'OBAK' software company. Your goal is to help customers with their service choices. Answer questions about features, prices, recommendations, and options based ONLY on the provided services data. Your answers must be in Arabic. Do not invent items. Be concise and helpful. Here is the services data in JSON format: ${JSON.stringify(SERVICES_DATA)}`;
 
         chatRef.current = ai.chats.create({
             model: 'gemini-2.5-flash',
@@ -40,7 +40,7 @@ const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ onClose }) => {
         });
         setMessages([{
             role: 'model',
-            text: 'أهلاً بك في شركة "يسرها"! كيف يمكنني مساعدتك في خدمات البرمجيات اليوم؟'
+            text: 'أهلاً بك في شركة "OBAK"! كيف يمكنني مساعدتك في خدمات التشطيبات اليوم؟'
         }]);
     } catch (e) {
         setError(e instanceof Error ? e.message : 'An unknown error occurred during initialization.');
