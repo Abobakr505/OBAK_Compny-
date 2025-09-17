@@ -206,7 +206,7 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">تفاصيل المشروع *</label>
+                    <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">الرسالة  *</label>
                     <textarea
                       name="message"
                       value={formData.message}
