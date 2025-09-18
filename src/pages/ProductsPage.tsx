@@ -5,10 +5,10 @@ import ProductGrid from "../components/ProductGrid";
 const ProductsPage: React.FC = () => {
   return (
     <section className="min-h-screen bg-gray-50 dark:bg-dark-900 py-12">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
 
               {/* Hero Section */}
-      <section className="py-20 rounded-md bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
+      <section className="py-20  bg-gradient-to-br from-primary-50 via-white to-secondary-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500 rounded-full blur-3xl animate-float"></div>
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary-500 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
