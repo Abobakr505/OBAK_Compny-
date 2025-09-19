@@ -60,7 +60,7 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
       {
         serviceId: 'service_q9eftm9',
         templateId: 'template_vk16gzo',
-        recipient: 'abobakrhasan5335@gmail.com',
+        recipient: 'alihasan5335@gmail.com',
         params: {
           name: 'مندوب',
           total: total.toFixed(2),
@@ -71,7 +71,7 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
       {
         serviceId: 'service_lcr6o8n',
         templateId: 'template_o1airgf',
-        recipient: 'yasuruha1@gmail.com',
+        recipient: 'alihasan5335@gmail.com',
         params: {
           name: 'المدير',
           total: total.toFixed(2),
