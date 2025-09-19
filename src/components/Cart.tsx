@@ -46,40 +46,40 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
       .join('\n') + `\nالمجموع الكلي: ${totalAmount.toFixed(2)} ج.م`;
 
     const messages = [
-      {
-        serviceId: 'service_tgzd2om',
-        templateId: 'template_40ru0ik',
-        recipient: customerEmail,
-        params: {
-          name: 'عميل',
-          total: total.toFixed(2),
-          order_details: orderDetails,
-        },
-        publicKey: '6nGwnsGKd0RPHSNcN',
-      },
-      {
-        serviceId: 'service_q9eftm9',
-        templateId: 'template_vk16gzo',
-        recipient: 'alihasan5335@gmail.com',
-        params: {
-          name: 'مندوب',
-          total: total.toFixed(2),
-          order_details: orderDetails,
-        },
-        publicKey: '6nGwnsGKd0RPHSNcN',
-      },
-      {
-        serviceId: 'service_lcr6o8n',
-        templateId: 'template_o1airgf',
-        recipient: 'alihasan5335@gmail.com',
-        params: {
-          name: 'المدير',
-          total: total.toFixed(2),
-          order_details: orderDetails,
-        },
-        publicKey: 'k9Ti1ib4trNRh4VAQ',
-      }
-    ];
+  {
+    serviceId: 'service_tgzd2om',
+    templateId: 'template_40ru0ik',
+    publicKey: '6nGwnsGKd0RPHSNcN',
+    params: {
+      to_email: customerEmail,   // 👈 لازم يكون to_email
+      name: 'عميل',
+      total: total.toFixed(2),
+      order_details: orderDetails,
+    },
+  },
+  {
+    serviceId: 'service_q9eftm9',
+    templateId: 'template_vk16gzo',
+    publicKey: '6nGwnsGKd0RPHSNcN',
+    params: {
+      to_email: 'alihasan5335@gmail.com',
+      name: 'مندوب',
+      total: total.toFixed(2),
+      order_details: orderDetails,
+    },
+  },
+  {
+    serviceId: 'service_lcr6o8n',
+    templateId: 'template_o1airgf',
+    publicKey: 'k9Ti1ib4trNRh4VAQ',
+    params: {
+      to_email: 'alihasan5335@gmail.com',
+      name: 'المدير',
+      total: total.toFixed(2),
+      order_details: orderDetails,
+    },
+  },
+];
 
     try {
       // Send emails
