@@ -125,7 +125,7 @@ const Dashboard: React.FC<{
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">إجمالي المبيعات</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white">{totalSales.toFixed(2)} ر.س</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white">{totalSales.toFixed(2)} ج.م</p>
           </div>
           <BarChart3 className="text-primary-500" size={40} />
         </div>

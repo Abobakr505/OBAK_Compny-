@@ -152,7 +152,7 @@ const ProductDetailsPage: React.FC = () => {
             </div>
 
             <div className="text-4xl font-bold text-primary-700 dark:text-primary-300 mb-8">
-              {product.price} ر.س
+              {product.price} ج.م
             </div>
 
             <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
