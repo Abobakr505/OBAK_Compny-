@@ -173,7 +173,7 @@ const ProductsTab: React.FC<{
             placeholder="اسم المنتج"
             value={newProduct.name}
             onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
+            className="w-full px-4 py-3 dark:text-gray-300  border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
             dir="rtl"
           />
         </div>
@@ -184,7 +184,7 @@ const ProductsTab: React.FC<{
             placeholder="السعر"
             value={newProduct.price}
             onChange={(e) => setNewProduct({ ...newProduct, price: parseFloat(e.target.value) })}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
+            className="w-full px-4 py-3 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
             dir="rtl"
           />
         </div>
@@ -195,7 +195,7 @@ const ProductsTab: React.FC<{
           placeholder="الوصف القصير (للبطاقة)"
           value={newProduct.short_description}
           onChange={(e) => setNewProduct({ ...newProduct, short_description: e.target.value })}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 h-24 text-right"
+          className="w-full px-4 py-3 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 h-24 text-right"
           dir="rtl"
         />
       </div>
@@ -205,7 +205,7 @@ const ProductsTab: React.FC<{
           placeholder="الوصف الطويل (لصفحة التفاصيل)"
           value={newProduct.description}
           onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 h-32 text-right"
+          className="w-full px-4 py-3  dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 h-32 text-right"
           dir="rtl"
         />
       </div>
@@ -257,7 +257,7 @@ const ProductsTab: React.FC<{
             placeholder="التقييم"
             value={newProduct.rating}
             onChange={(e) => setNewProduct({ ...newProduct, rating: parseFloat(e.target.value) })}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
+            className="w-full px-4 py-3 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
             dir="rtl"
           />
         </div>
@@ -268,19 +268,19 @@ const ProductsTab: React.FC<{
             placeholder="عدد المراجعات"
             value={newProduct.reviews}
             onChange={(e) => setNewProduct({ ...newProduct, reviews: parseInt(e.target.value) })}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
+            className="w-full px-4 py-3 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
             dir="rtl"
           />
         </div>
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">الأنواع (مفصولة بفاصلة)</label>
+        <label className="block  text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">الأنواع (مفصولة بفاصلة)</label>
         <input
           type="text"
           placeholder="الأنواع (مفصولة بفاصلة)"
           value={newProduct.variants.join(', ')}
           onChange={handleVariantsChange}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
+          className="w-full px-4 py-3 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
           dir="rtl"
         />
       </div>
@@ -291,7 +291,7 @@ const ProductsTab: React.FC<{
           placeholder="المميزات (مفصولة بفاصلة)"
           value={newProduct.features.join(', ')}
           onChange={handleFeaturesChange}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
+          className="w-full px-4 py-3 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 focus:ring-2 focus:ring-primary-500 focus:border-transparent shadow-sm transition duration-200 text-right"
           dir="rtl"
         />
       </div>
