@@ -153,7 +153,6 @@ const ProductsTab: React.FC<{
   categories,
   newProduct,
   setNewProduct,
-  selectedImages,
   setSelectedImages,
   editingProductId,
   addOrUpdateProduct,
