@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { CartProvider } from './contexts/CartContext';
 import { AuthProvider } from './contexts/AuthContext';
@@ -18,25 +18,24 @@ import LatestProducts from './components/LatestProducts';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { Toaster } from 'react-hot-toast';
 
-function App() {
+function AppContent() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const location = useLocation();
+
+  // نخفي الهيدر والفوتر في صفحة الأدمن
+  const isAdminPage = location.pathname.startsWith("/admin");
 
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <CartProvider>
-          <Router>
-            <div className="min-h-screen bg-white dark:bg-dark-900 transition-colors duration-300 flex flex-col">
-              <Header onCartClick={() => setIsCartOpen(true)} />
-                
+    <div className="min-h-screen bg-white dark:bg-dark-900 transition-colors duration-300 flex flex-col">
+      {!isAdminPage && <Header onCartClick={() => setIsCartOpen(true)} />}
 
-              <motion.main
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-                className="flex-1"
-              >
-                        {/* Toaster مركزي لجميع التطبيق */}
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex-1"
+      >
+        {/* Toaster مركزي لجميع التطبيق */}
         <Toaster
           position="top-center"
           toastOptions={{
@@ -52,27 +51,40 @@ function App() {
           }}
         />
 
-                <Routes>
-                  {/* الصفحة الرئيسية */}
-                  <Route path="/" element={<><Hero /><LatestProducts /> <About/> <FAQ/> </>} />
+        <Routes>
+          {/* الصفحة الرئيسية */}
+          <Route path="/" element={<><Hero /><LatestProducts /> <About/> <FAQ/> </>} />
 
-                  {/* صفحات جديدة */}
-                  <Route path="/contact" element={<Contact />} />
+          {/* صفحات جديدة */}
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/product/:id" element={<ProductDetailsPage />} />
 
-                  <Route path="/products" element={<ProductsPage />} />
-                  <Route path="/product/:id" element={<ProductDetailsPage />} />
-                  {/* صفحة لوحة التحكم */}
-                  <Route path="/admin" element={<AdminPanel />} />
-                </Routes>
-              </motion.main>
-              <WhatsAppButton/>
-              <Footer />
+          {/* صفحة لوحة التحكم */}
+          <Route path="/admin" element={<AdminPanel />} />
+        </Routes>
+      </motion.main>
 
-              <Cart 
-                isOpen={isCartOpen} 
-                onClose={() => setIsCartOpen(false)} 
-              />
-            </div>
+      {!isAdminPage && <WhatsAppButton />}
+      {!isAdminPage && <Footer />}
+
+      {!isAdminPage && (
+        <Cart 
+          isOpen={isCartOpen} 
+          onClose={() => setIsCartOpen(false)} 
+        />
+      )}
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <CartProvider>
+          <Router>
+            <AppContent />
           </Router>
         </CartProvider>
       </AuthProvider>

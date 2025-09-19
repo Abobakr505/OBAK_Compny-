@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import emailjs from 'emailjs-com';
 import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle, Star, Users } from 'lucide-react';
 
 const Contact = () => {
+  const formRef = useRef<HTMLFormElement | null>(null); // Reference to the form element for EmailJS
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    service: '',
-    message: '',
+    message: '', // Removed 'service' as it's not in the form anymore
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null); // To handle submission errors
 
   useEffect(() => {
     const observerOptions = {
@@ -41,9 +44,27 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+
+    // EmailJS configuration - Replace with your actual IDs
+    const serviceID = 'service_1bdsc8t'; // From EmailJS dashboard
+    const templateID = 'template_zvn7klm'; // From EmailJS dashboard
+    const userID = 'k9Ti1ib4trNRh4VAQ'; // From EmailJS account (Public Key)
+
+    if (formRef.current) {
+      emailjs.sendForm(serviceID, templateID, formRef.current, userID)
+        .then((result) => {
+          console.log('Form submitted successfully:', result.text);
+          setIsSubmitted(true);
+          setError(null);
+          setFormData({ name: '', email: '', phone: '', message: '' }); // Reset form
+          setTimeout(() => setIsSubmitted(false), 3000);
+        }, (error) => {
+          console.error('Form submission error:', error.text);
+          setError('حدث خطأ أثناء إرسال الرسالة. يرجى المحاولة مرة أخرى.');
+        });
+    } else {
+      setError('حدث خطأ في تحميل النموذج. يرجى إعادة تحميل الصفحة والمحاولة مرة أخرى.');
+    }
   };
 
   const contactMethods = [
@@ -166,29 +187,35 @@ const Contact = () => {
                   </div>
                 )}
                 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                {error && (
+                  <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-xl flex items-center space-x-3">
+                    <span className="text-red-800 dark:text-red-300 ">{error}</span>
+                  </div>
+                )}
+                
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">الاسم الكامل *</label>
                       <input
                         type="text"
-                        name="name"
+                        name="name" // This must match the template variable in EmailJS
                         value={formData.name}
                         onChange={handleChange}
                         className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
                         required
                       />
-                    </div><div>
+                    </div>
+                    <div>
                       <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">رقم الهاتف</label>
                       <input
                         type="tel"
-                        name="phone"
+                        name="phone" // This must match the template variable in EmailJS
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
                       />
                     </div>
-                    
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
@@ -196,7 +223,7 @@ const Contact = () => {
                       <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">البريد الإلكتروني *</label>
                       <input
                         type="email"
-                        name="email"
+                        name="email" // This must match the template variable in EmailJS
                         value={formData.email}
                         onChange={handleChange}
                         className="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300"
@@ -206,9 +233,9 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">الرسالة  *</label>
+                    <label className="block text-gray-700 dark:text-gray-300 mb-2 font-medium ">الرسالة *</label>
                     <textarea
-                      name="message"
+                      name="message" // This must match the template variable in EmailJS
                       value={formData.message}
                       onChange={handleChange}
                       rows={5}

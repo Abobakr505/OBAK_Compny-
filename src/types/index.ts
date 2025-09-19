@@ -1,18 +1,20 @@
+// types.ts
 export interface Product {
-  id: string;
+  id: number;
   name: string;
-  description: string; // الوصف القصير
-  longDescription?: string; // الوصف الطويل (اختياري)
+  description: string;
+  short_description: string;
   price: number;
-  image: string;
+  main_image: string;
+  additional_images: string[];
   category: string;
-  inStock: boolean;
   rating: number;
   reviews: number;
-  variants?: string[]; // الأنواع أو الخيارات المتاحة للمنتج
-  features?: string[]; // قائمة المميزات
+  in_stock: boolean;
+  variants: string[];
+  features: string[];
+  sales: number; // Added sales field
 }
-
 export interface CartItem {
   product: Product;
   quantity: number;

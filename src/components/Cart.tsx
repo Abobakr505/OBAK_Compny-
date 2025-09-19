@@ -4,6 +4,7 @@ import { X, Plus, Minus, Trash2, AlertCircle, MailCheck } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import emailjs from 'emailjs-com';
 import Swal from 'sweetalert2';
+import { supabase } from '../lib/supabaseClient';
 
 interface CartProps {
   isOpen: boolean;
@@ -16,80 +17,124 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
   const [customerEmail, setCustomerEmail] = useState('');
 
   const sendEmails = async () => {
-  if (items.length === 0) {
-    Swal.fire({
-      icon: 'info',
-      title: 'السلة فارغة',
-      text: 'أضف بعض المنتجات لتتمكن من الإرسال!',
-    });
-    return;
-  }
-
-  if (!customerEmail) {
-    Swal.fire({
-      icon: 'warning',
-      title: 'البريد الإلكتروني مطلوب',
-      text: 'يرجى إدخال بريدك الإلكتروني لتلقي تفاصيل الطلب.',
-    });
-    return;
-  }
-// جمع المجموع الكلي
-const totalAmount = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
-
-// إنشاء نص تفاصيل الطلب مع المجموع الكلي في النهاية
-const orderDetails = items
-  .map((i, idx) =>
-    `${idx + 1}. ${i.product.name}\n   السعر: ${i.product.price} ر.س\n   الكمية: ${i.quantity}\n   المجموع: ${(i.product.price * i.quantity).toFixed(2)} ر.س\n----------------------`
-  )
-  .join('\n') + `\nالمجموع الكلي: ${totalAmount.toFixed(2)} ر.س`;
-
-
-const messages = [
-  {
-    serviceId: 'service_tgzd2om',
-    templateId: 'template_40ru0ik',
-    recipient: customerEmail,
-    params: {
-      name: 'عميل',
-      total: total.toFixed(2),
-      order_details: orderDetails, // لازم يتطابق مع اسم المتغير في القالب
+    if (items.length === 0) {
+      Swal.fire({
+        icon: 'info',
+        title: 'السلة فارغة',
+        text: 'أضف بعض المنتجات لتتمكن من الإرسال!',
+      });
+      return;
     }
-  },
-  {
-    serviceId: 'service_q9eftm9',
-    templateId: 'template_vk16gzo',
-    recipient: 'abobakrhasan5335@gmail.com',
-    params: {
-      name: 'مندوب',
-      total: total.toFixed(2),
-      order_details: orderDetails, // نفس الشيء هنا
-    }
-  },
-];
 
-  try {
-    for (const msg of messages) {
-      await emailjs.send(msg.serviceId, msg.templateId, msg.params, '6nGwnsGKd0RPHSNcN');
+    if (!customerEmail) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'البريد الإلكتروني مطلوب',
+        text: 'يرجى إدخال بريدك الإلكتروني لتلقي تفاصيل الطلب.',
+      });
+      return;
     }
-    Swal.fire({
-      icon: 'success',
-      title: 'تم الإرسال!',
-      text: 'تم إرسال جميع الرسائل بنجاح ✅',
-      timer: 3000,
-      showConfirmButton: false,
-    });
-    setShowConfirmModal(false);
-    clearCart();
-  } catch (error) {
-    console.error(error);
-    Swal.fire({
-      icon: 'error',
-      title: 'خطأ',
-      text: 'حدث خطأ أثناء إرسال الرسائل ❌',
-    });
-  }
-};
 
+    // جمع المجموع الكلي
+    const totalAmount = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+
+    // إنشاء نص تفاصيل الطلب مع المجموع الكلي في النهاية
+    const orderDetails = items
+      .map((i, idx) =>
+        `${idx + 1}. ${i.product.name}\n   السعر: ${i.product.price} ج.م\n   الكمية: ${i.quantity}\n   المجموع: ${(i.product.price * i.quantity).toFixed(2)} ج.م\n----------------------`
+      )
+      .join('\n') + `\nالمجموع الكلي: ${totalAmount.toFixed(2)} ج.م`;
+
+    const messages = [
+      {
+        serviceId: 'service_tgzd2om',
+        templateId: 'template_40ru0ik',
+        recipient: customerEmail,
+        params: {
+          name: 'عميل',
+          total: total.toFixed(2),
+          order_details: orderDetails,
+        },
+        publicKey: '6nGwnsGKd0RPHSNcN',
+      },
+      {
+        serviceId: 'service_q9eftm9',
+        templateId: 'template_vk16gzo',
+        recipient: 'abobakrhasan5335@gmail.com',
+        params: {
+          name: 'مندوب',
+          total: total.toFixed(2),
+          order_details: orderDetails,
+        },
+        publicKey: '6nGwnsGKd0RPHSNcN',
+      },
+      {
+        serviceId: 'service_lcr6o8n',
+        templateId: 'template_o1airgf',
+        recipient: 'yasuruha1@gmail.com',
+        params: {
+          name: 'المدير',
+          total: total.toFixed(2),
+          order_details: orderDetails,
+        },
+        publicKey: 'k9Ti1ib4trNRh4VAQ',
+      }
+    ];
+
+    try {
+      // Send emails
+      for (const msg of messages) {
+        await emailjs.send(msg.serviceId, msg.templateId, msg.params, msg.publicKey);
+      }
+
+      // Update sales count in Supabase
+      for (const item of items) {
+        const { data: product, error: fetchError } = await supabase
+          .from('products')
+          .select('sales')
+          .eq('id', item.product.id)
+          .single();
+
+        if (fetchError) {
+          throw new Error(`خطأ في جلب بيانات المنتج ${item.product.id}: ${fetchError.message}`);
+        }
+
+        const currentSales = product.sales || 0;
+        const newSales = currentSales + item.quantity;
+
+        const { error: updateError } = await supabase
+          .from('products')
+          .update({ sales: newSales })
+          .eq('id', item.product.id);
+
+        if (updateError) {
+          throw new Error(`خطأ في تحديث المبيعات للمنتج ${item.product.id}: ${updateError.message}`);
+        }
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: 'تم الإرسال!',
+        text: 'تم إرسال جميع الرسائل وتحديث المبيعات بنجاح ✅',
+        color: "#fff",
+        background: "#d97706",
+        timer: 3000,
+        showConfirmButton: false,
+      });
+      setShowConfirmModal(false);
+      clearCart();
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'خطأ',
+        text: 'حدث خطأ أثناء إرسال الرسائل أو تحديث المبيعات ❌',
+        color: "#fff",
+        background: "#d97706",
+        confirmButtonColor: "#b45309",
+      });
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -157,7 +202,7 @@ const messages = [
                       className="flex items-center space-x-4 space-x-reverse bg-gray-50 dark:bg-dark-800 p-3 rounded-lg hover:shadow-md transition-shadow"
                     >
                       <img
-                        src={item.product.image}
+                        src={item.product.main_image}
                         alt={item.product.name}
                         className="w-16 h-16 object-cover rounded-lg"
                       />
@@ -166,7 +211,7 @@ const messages = [
                           {item.product.name}
                         </h3>
                         <p className="text-primary-600 dark:text-primary-400 font-semibold">
-                          {item.product.price} ر.س
+                          {item.product.price} ج.م
                         </p>
                       </div>
                       <div className="flex items-center space-x-2 space-x-reverse">
@@ -212,7 +257,7 @@ const messages = [
                     المجموع:
                   </span>
                   <span className="text-xl font-bold text-primary-600 dark:text-primary-400">
-                    {total.toFixed(2)} ر.س
+                    {total.toFixed(2)} ج.م
                   </span>
                 </div>
 
@@ -223,7 +268,6 @@ const messages = [
                     onClick={() => setShowConfirmModal(true)}
                     className="w-full bg-primary-500 hover:bg-primary-600 text-white py-3 rounded-lg font-medium flex items-center justify-center space-x-2 space-x-reverse transition-colors"
                   >
-                    
                     <span>إرسال الطلب عبر البريد</span>
                     <MailCheck size={20} />
                   </motion.button>
@@ -239,7 +283,6 @@ const messages = [
                 </div>
               </div>
             )}
-
           </motion.div>
 
           {/* Confirm Modal */}

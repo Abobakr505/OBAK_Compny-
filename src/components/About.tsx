@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Users, Award, Target, Heart, TrendingUp, Shield, CheckCircle, Star } from 'lucide-react';
+import { Users, Award, Target, Heart, TrendingUp, Shield, CheckCircle, Star, HousePlus, Smile } from 'lucide-react';
 import { motion, useInView, useAnimation, easeOut, backOut } from 'framer-motion';
 import { useEffect } from 'react';
 
@@ -103,9 +103,9 @@ const About = () => {
   ];
 
   const stats = [
-    { number: '2,500+', label: ' وحدات مكتملة', icon: '💯' },
-    { number: '2,000+', label: ' عملاء سعداء', icon: '😊' },
-    { number: '700+', label: 'مشروع مكتمل', icon: '⭐' },
+    { number: '2,500+', label: ' وحدات مكتملة', icon: HousePlus  },
+    { number: '2,000+', label: ' عملاء سعداء', icon: Smile },
+    { number: '700+', label: 'مشروع مكتمل', icon: Award },
   ];
 
   const achievements = [
@@ -219,7 +219,9 @@ const About = () => {
               animate={statsControls}
               className="text-center glass-effect rounded-2xl p-6 hover:scale-105 transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-700/50"
             >
-              <div className="text-3xl mb-3">{stat.icon}</div>
+              <div className='w-20 h-20 bg-gradient-to-r from-primary-500 to-primary-600  rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg'>
+                <stat.icon className="w-10 h-10 text-white" />
+              </div>
               <div className="text-3xl font-bold gradient-text mb-2">{stat.number}</div>
               <div className="text-gray-600 dark:text-gray-400 font-medium text-sm">{stat.label}</div>
             </motion.div>

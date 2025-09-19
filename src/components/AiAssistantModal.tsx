@@ -40,7 +40,7 @@ const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ onClose }) => {
         });
         setMessages([{
             role: 'model',
-            text: 'أهلاً بك في شركة "OBAK"! كيف يمكنني مساعدتك في خدمات التشطيبات اليوم؟'
+            text: 'أهلاً بك في شركة "OBAK"! كيف يمكنني مساعدتك في منتجات التشطيبات اليوم؟'
         }]);
     } catch (e) {
         setError(e instanceof Error ? e.message : 'An unknown error occurred during initialization.');
@@ -130,7 +130,7 @@ const AiAssistantModal: React.FC<AiAssistantModalProps> = ({ onClose }) => {
               type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
-              placeholder="اسأل عن الخدمات، الميزات، أو الأسعار..."
+              placeholder="اسأل عن المنتجات، الميزات، أو الأسعار..."
               className="flex-1 bg-transparent px-4 text-slate-800 placeholder-slate-500 focus:outline-none"
               disabled={isLoading}
               dir="rtl"
