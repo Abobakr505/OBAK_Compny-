@@ -388,7 +388,7 @@ const CategoriesTab: React.FC<{
 );
 
 const AdminPanel: React.FC = () => {
-  const { isAuthenticated, login, logout, user } = useAuth();
+  const { isAuthenticated, login, logout } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -403,7 +403,7 @@ const AdminPanel: React.FC = () => {
     short_description: '',
     price: 0,
     main_image: '',
-    additional_images: [],
+    additional_images: [] as string[],
     category: '',
     rating: 0,
     reviews: 0,

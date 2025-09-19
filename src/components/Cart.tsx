@@ -218,7 +218,7 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
                         <motion.button
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
-                          onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(String(item.product.id), item.quantity - 1)}
                           className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                         >
                           <Minus size={16} />
@@ -229,7 +229,7 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
                         <motion.button
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
-                          onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(String(item.product.id), item.quantity + 1)}
                           className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                         >
                           <Plus size={16} />
@@ -238,7 +238,7 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        onClick={() => removeFromCart(item.product.id)}
+                        onClick={() => removeFromCart(String(item.product.id))}
                         className="p-1 text-red-500 hover:text-red-700"
                       >
                         <Trash2 size={16} />

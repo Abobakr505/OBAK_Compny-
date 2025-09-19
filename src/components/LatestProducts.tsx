@@ -5,18 +5,8 @@ import { ArrowRight, HelpCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 
-interface Product {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  rating: number;
-  reviews: number;
-  description: string;
-  image: string;
-  in_stock: boolean;
-  variants: string[];
-}
+// Use the shared Product type definition
+import type { Product } from "../types";
 
 const LatestProducts: React.FC = () => {
   const [latestProducts, setLatestProducts] = useState<Product[]>([]);
