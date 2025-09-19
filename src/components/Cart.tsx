@@ -15,6 +15,8 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
   const { items, updateQuantity, removeFromCart, total, clearCart } = useCart();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [customerEmail, setCustomerEmail] = useState('');
+  const [customerName, setCustomerName] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
 
   const sendEmails = async () => {
     if (items.length === 0) {
@@ -26,11 +28,11 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    if (!customerEmail) {
+    if (!customerEmail || !customerName || !customerPhone) {
       Swal.fire({
         icon: 'warning',
-        title: 'البريد الإلكتروني مطلوب',
-        text: 'يرجى إدخال بريدك الإلكتروني لتلقي تفاصيل الطلب.',
+        title: 'معلومات العميل مطلوبة',
+        text: 'يرجى إدخال الاسم، البريد الإلكتروني، ورقم الهاتف لتلقي تفاصيل الطلب.',
       });
       return;
     }
@@ -38,47 +40,53 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
     // جمع المجموع الكلي
     const totalAmount = items.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
 
-    // إنشاء نص تفاصيل الطلب مع المجموع الكلي في النهاية
-    const orderDetails = items
-      .map((i, idx) =>
-        `${idx + 1}. ${i.product.name}\n   السعر: ${i.product.price} ج.م\n   الكمية: ${i.quantity}\n   المجموع: ${(i.product.price * i.quantity).toFixed(2)} ج.م\n----------------------`
-      )
-      .join('\n') + `\nالمجموع الكلي: ${totalAmount.toFixed(2)} ج.م`;
-
-    const messages = [
+    // إنشاء نص تفاصيل الطلب مع إضافة معلومات العميل والمجموع الكلي
+    const orderDetails = `معلومات العميل:\nاسم العميل: ${customerName}\nالبريد الإلكتروني: ${customerEmail}\nرقم الهاتف: ${customerPhone}\n\nتفاصيل الطلب:\n` +
+      items
+        .map((i, idx) =>
+          `${idx + 1}. ${i.product.name}\n   السعر: ${i.product.price} ج.م\n   الكمية: ${i.quantity}\n   المجموع: ${(i.product.price * i.quantity).toFixed(2)} ج.م\n----------------------`
+        )
+        .join('\n') + `\nالمجموع الكلي: ${totalAmount.toFixed(2)} ج.م`;
+const messages = [
   {
     serviceId: 'service_tgzd2om',
     templateId: 'template_40ru0ik',
-    publicKey: '6nGwnsGKd0RPHSNcN',
     params: {
-      to_email: customerEmail,   // 👈 لازم يكون to_email
-      name: 'عميل',
+      to_email: customerEmail, // Add to_email to params
+      name: customerName,
+      email: customerEmail,
+      phone: customerPhone,
       total: total.toFixed(2),
       order_details: orderDetails,
     },
+    publicKey: '6nGwnsGKd0RPHSNcN',
   },
   {
     serviceId: 'service_q9eftm9',
     templateId: 'template_vk16gzo',
-    publicKey: '6nGwnsGKd0RPHSNcN',
     params: {
-      to_email: 'alihasan5335@gmail.com',
-      name: 'مندوب',
+      to_email: 'alihasan5335@gmail.com', // Add to_email to params
+      name: customerName,
+      email: customerEmail,
+      phone: customerPhone,
       total: total.toFixed(2),
       order_details: orderDetails,
     },
+    publicKey: '6nGwnsGKd0RPHSNcN',
   },
   {
     serviceId: 'service_lcr6o8n',
     templateId: 'template_o1airgf',
-    publicKey: 'k9Ti1ib4trNRh4VAQ',
     params: {
-      to_email: 'alihasan5335@gmail.com',
-      name: 'المدير',
+      to_email: 'alihasan5335@gmail.com', // Add to_email to params
+      name: customerName,
+      email: customerEmail,
+      phone: customerPhone,
       total: total.toFixed(2),
       order_details: orderDetails,
     },
-  },
+    publicKey: 'k9Ti1ib4trNRh4VAQ',
+  }
 ];
 
     try {
@@ -123,6 +131,9 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
       });
       setShowConfirmModal(false);
       clearCart();
+      setCustomerName('');
+      setCustomerEmail('');
+      setCustomerPhone('');
     } catch (error) {
       console.error(error);
       Swal.fire({
@@ -313,14 +324,28 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
                     <AlertCircle size={40} className="mx-auto text-yellow-500" />
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">تأكيد الإرسال</h3>
                     <p className="text-gray-600 dark:text-gray-400">
-                      أدخل بريدك الإلكتروني لتلقي تفاصيل الطلب:
+                      أدخل معلوماتك لتلقي تفاصيل الطلب:
                     </p>
 
+                    <input
+                      type="text"
+                      value={customerName}
+                      onChange={(e) => setCustomerName(e.target.value)}
+                      placeholder="اسم العميل"
+                      className="w-full border rounded-lg p-2 text-center dark:bg-dark-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 mb-2"
+                    />
                     <input
                       type="email"
                       value={customerEmail}
                       onChange={(e) => setCustomerEmail(e.target.value)}
                       placeholder="example@mail.com"
+                      className="w-full border rounded-lg p-2 text-center dark:bg-dark-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 mb-2"
+                    />
+                    <input
+                      type="tel"
+                      value={customerPhone}
+                      onChange={(e) => setCustomerPhone(e.target.value)}
+                      placeholder="رقم الهاتف"
                       className="w-full border rounded-lg p-2 text-center dark:bg-dark-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
 
@@ -333,10 +358,12 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose }) => {
                       </button>
                       <motion.button
                         onClick={sendEmails}
-                        disabled={!customerEmail}
-                        whileTap={{ scale: customerEmail ? 0.95 : 1 }}
+                        disabled={!customerEmail || !customerName || !customerPhone}
+                        whileTap={{ scale: customerEmail && customerName && customerPhone ? 0.95 : 1 }}
                         className={`px-4 py-2 rounded-lg text-white ${
-                          customerEmail ? "bg-primary-500 hover:bg-primary-600" : "bg-gray-400 cursor-not-allowed"
+                          customerEmail && customerName && customerPhone
+                            ? "bg-primary-500 hover:bg-primary-600"
+                            : "bg-gray-400 cursor-not-allowed"
                         }`}
                       >
                         تأكيد
