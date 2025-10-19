@@ -57,17 +57,18 @@ const Header: React.FC<HeaderProps> = ({ onCartClick }) => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center space-x-1 space-x-reverse">
-            <div className="w-10 h-10 flex items-center justify-center mt-2">
-              <img className="scale-150" src="/logo.png" alt="logo" />
-            </div>
-            <div>
-              <h1 className="logo text-xl font-bold text-gray-900 dark:text-white">OBAK</h1>
-              <p className="text-xs text-gray-600 dark:text-gray-400">متجر التشطيبات</p>
-            </div>
-          </motion.div>
-
+          <Link to="/">
+            {/* Logo */}
+            <motion.div whileHover={{ scale: 1.05 }} className="flex items-center space-x-1 space-x-reverse">
+              <div className="w-10 h-10 flex items-center justify-center mt-2">
+                <img className="scale-150" src="/logo.png" alt="logo" />
+              </div>
+              <div>
+                <h1 className="logo text-xl font-bold text-gray-900 dark:text-white">OBAK</h1>
+                <p className="text-xs text-gray-600 dark:text-gray-400">متجر التشطيبات</p>
+              </div>
+            </motion.div>
+          </Link>
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8 space-x-reverse">
             {links.map((link, i) => (

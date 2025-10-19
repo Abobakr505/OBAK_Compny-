@@ -1,7 +1,17 @@
-import { useRef } from 'react';
-import { Users, Award, Target, Heart, TrendingUp, Shield, CheckCircle, Star, HousePlus, Smile } from 'lucide-react';
+import { useRef, useEffect } from 'react';
+import {
+  Users,
+  Award,
+  Target,
+  Heart,
+  TrendingUp,
+  Shield,
+  CheckCircle,
+  Star,
+  HousePlus,
+  Smile
+} from 'lucide-react';
 import { motion, useInView, useAnimation, easeOut, backOut } from 'framer-motion';
-import { useEffect } from 'react';
 
 const About = () => {
   const sectionRef = useRef(null);
@@ -10,16 +20,17 @@ const About = () => {
   const valuesRef = useRef(null);
   const statsRef = useRef(null);
 
-  // Set up animation controls and inView hooks
+  // Animation controls
   const contentControls = useAnimation();
   const imageControls = useAnimation();
   const valuesControls = useAnimation();
   const statsControls = useAnimation();
 
-  const contentInView = useInView(contentRef, { amount: 0.2 });
-  const imageInView = useInView(imageRef, { amount: 0.2 });
-  const valuesInView = useInView(valuesRef, { amount: 0.2 });
-  const statsInView = useInView(statsRef, { amount: 0.2 });
+  // useInView hooks with once:true
+  const contentInView = useInView(contentRef, { amount: 0.2, once: true });
+  const imageInView = useInView(imageRef, { amount: 0.2, once: true });
+  const valuesInView = useInView(valuesRef, { amount: 0.2, once: true });
+  const statsInView = useInView(statsRef, { amount: 0.2, once: true });
 
   // Animation variants
   const contentVariants = {
@@ -42,70 +53,72 @@ const About = () => {
     visible: { scale: 1, opacity: 1, transition: { duration: 0.6, ease: backOut } }
   };
 
-  // Trigger animations based on inView status
+  // Trigger animations only once
   useEffect(() => {
     if (contentInView) contentControls.start('visible');
-    else contentControls.start('hidden');
   }, [contentInView, contentControls]);
 
   useEffect(() => {
     if (imageInView) imageControls.start('visible');
-    else imageControls.start('hidden');
   }, [imageInView, imageControls]);
 
   useEffect(() => {
     if (valuesInView) valuesControls.start('visible');
-    else valuesControls.start('hidden');
   }, [valuesInView, valuesControls]);
 
   useEffect(() => {
     if (statsInView) statsControls.start('visible');
-    else statsControls.start('hidden');
   }, [statsInView, statsControls]);
 
   const values = [
     {
       icon: Target,
       title: 'الإبداع والابتكار',
-      description: 'نسعى دائماً لتقديم حلول إبداعية ومبتكرة تتجاوز توقعات عملائنا وتحقق أهدافهم',
+      description:
+        'نسعى دائماً لتقديم حلول إبداعية ومبتكرة تتجاوز توقعات عملائنا وتحقق أهدافهم',
       color: 'from-blue-500 to-cyan-500'
     },
     {
       icon: Award,
       title: 'الجودة العالية',
-      description: 'نلتزم بأعلى معايير الجودة في جميع مراحل الإنتاج والتنفيذ لضمان التميز',
+      description:
+        'نلتزم بأعلى معايير الجودة في جميع مراحل الإنتاج والتنفيذ لضمان التميز',
       color: 'from-purple-500 to-pink-500'
     },
     {
       icon: Users,
       title: 'العمل الجماعي',
-      description: 'فريق متخصص يعمل بتناغم وتعاون لضمان تحقيق أفضل النتائج الممكنة',
+      description:
+        'فريق متخصص يعمل بتناغم وتعاون لضمان تحقيق أفضل النتائج الممكنة',
       color: 'from-green-500 to-teal-500'
     },
     {
       icon: Heart,
       title: 'الشغف والالتزام',
-      description: 'نحب ما نعمل ونلتزم بتقديم أفضل ما لدينا في كل مشروع نتولاه',
+      description:
+        'نحب ما نعمل ونلتزم بتقديم أفضل ما لدينا في كل مشروع نتولاه',
       color: 'from-red-500 to-pink-500'
     },
     {
       icon: TrendingUp,
       title: 'النمو المستمر',
-      description: 'نواكب أحدث التقنيات والاتجاهات في عالم الإنتاج المرئي والتطوير المستمر',
+      description:
+        'نواكب أحدث التقنيات والاتجاهات في عالم الإنتاج المرئي والتطوير المستمر',
       color: 'from-orange-500 to-yellow-500'
     },
     {
       icon: Shield,
       title: 'الثقة والأمان',
-      description: 'نحافظ على سرية مشاريع عملائنا ونضمن حقوق الملكية الفكرية بأعلى المعايير',
+      description:
+        'نحافظ على سرية مشاريع عملائنا ونضمن حقوق الملكية الفكرية بأعلى المعايير',
       color: 'from-indigo-500 to-purple-500'
     }
   ];
 
   const stats = [
-    { number: '2,500+', label: ' وحدات مكتملة', icon: HousePlus  },
+    { number: '2,500+', label: ' وحدات مكتملة', icon: HousePlus },
     { number: '2,000+', label: ' عملاء سعداء', icon: Smile },
-    { number: '700+', label: 'مشروع مكتمل', icon: Award },
+    { number: '700+', label: 'مشروع مكتمل', icon: Award }
   ];
 
   const achievements = [
@@ -116,12 +129,21 @@ const About = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="pt-24 bg-white dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="pt-24 bg-white dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5 dark:opacity-10">
         <div className="absolute top-20 left-20 w-40 h-40 bg-primary-500 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 bg-secondary-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-24 h-24 bg-primary-300 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '4s' }}></div>
+        <div
+          className="absolute bottom-20 right-20 w-32 h-32 bg-secondary-500 rounded-full blur-3xl animate-pulse"
+          style={{ animationDelay: '2s' }}
+        ></div>
+        <div
+          className="absolute top-1/2 left-1/2 w-24 h-24 bg-primary-300 rounded-full blur-2xl animate-pulse"
+          style={{ animationDelay: '4s' }}
+        ></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -136,30 +158,41 @@ const About = () => {
           >
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-100 to-secondary-100 dark:from-primary-900/30 dark:to-secondary-900/30 rounded-full px-6 py-3 mb-6">
               <Users className="w-5 h-5 text-primary-600 dark:text-primary-400" />
-              <span className="text-sm font-medium text-primary-700 dark:text-primary-300">من نحن</span>
+              <span className="text-sm font-medium text-primary-700 dark:text-primary-300">
+                من نحن
+              </span>
             </div>
-            
+
             <h2 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-              فريقك المختص في 
+              فريقك المختص في
               <span className="block gradient-text py-2">التصميم والديكور</span>
             </h2>
-            
+
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              نحن فريق من المتخصصين في التصميم والتنفيذ، نقدم حلولًا متكاملة ومبتكرة تناسب احتياجاتك وتطلعاتك. في OBAK، نؤمن بأن لكل مساحة قصة مميزة، ودورنا هو روايتها من خلال تصميمات تجمع بين الحداثة والأصالة.</p>
-            
+              نحن فريق من المتخصصين في التصميم والتنفيذ، نقدم حلولًا متكاملة ومبتكرة
+              تناسب احتياجاتك وتطلعاتك. في OBAK، نؤمن بأن لكل مساحة قصة مميزة،
+              ودورنا هو روايتها من خلال تصميمات تجمع بين الحداثة والأصالة.
+            </p>
+
             <p className="text-lg text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">
-             نمزج بين أحدث التقنيات وأفضل معايير الجودة لنحول رؤيتك إلى واقع. سواء كنت تبحث عن تصميم منزل فريد، مكتب عملي، أو مشروع تجاري مميز، نحرص على أن تكون كل تفصيلة مصممة بعناية لتعكس شخصيتك وتضيف قيمة إلى حياتك.</p>
+              نمزج بين أحدث التقنيات وأفضل معايير الجودة لنحول رؤيتك إلى واقع.
+              سواء كنت تبحث عن تصميم منزل فريد، مكتب عملي، أو مشروع تجاري مميز،
+              نحرص على أن تكون كل تفصيلة مصممة بعناية لتعكس شخصيتك وتضيف قيمة إلى
+              حياتك.
+            </p>
 
             {/* Achievements list */}
             <div className="space-y-4 mb-8">
               {achievements.map((achievement, index) => (
                 <div key={index} className="flex items-start space-x-3">
                   <CheckCircle className="w-6 h-6 text-primary-500 mt-1 flex-shrink-0" />
-                  <span className="text-gray-700 dark:text-gray-300">{achievement}</span>
+                  <span className="text-gray-700 dark:text-gray-300">
+                    {achievement}
+                  </span>
                 </div>
               ))}
             </div>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
               <button className="bg-primary-600 hover:scale-110 text-white px-8 py-4 rounded-xl hover:from-primary-600 hover:to-secondary-600 transition-all duration-300 transform shadow-lg">
                 تعرف على فريقنا
@@ -170,7 +203,7 @@ const About = () => {
             </div>
           </motion.div>
 
-          {/* Enhanced Image */}
+          {/* Image */}
           <motion.div
             ref={imageRef}
             variants={imageVariants}
@@ -185,16 +218,19 @@ const About = () => {
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
               />
             </div>
-            {/* Decorative elements */}
+
             <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-3xl blur-3xl opacity-60 animate-pulse"></div>
-            <div className="absolute -top-8 -left-8 w-24 h-24 bg-gradient-to-r from-secondary-500 to-primary-500 rounded-3xl blur-2xl opacity-50 animate-pulse" style={{ animationDelay: '1s' }}></div>
-            
+            <div
+              className="absolute -top-8 -left-8 w-24 h-24 bg-gradient-to-r from-secondary-500 to-primary-500 rounded-3xl blur-2xl opacity-50 animate-pulse"
+              style={{ animationDelay: '1s' }}
+            ></div>
+
             {/* Floating stats */}
             <div className="absolute top-8 left-8 glass-effect rounded-2xl p-4 shadow-xl">
               <div className="text-2xl font-bold gradient-text">700+</div>
               <div className="text-sm text-white dark:text-black">مشروع</div>
             </div>
-            
+
             <div className="absolute bottom-8 right-8 glass-effect rounded-2xl p-4 shadow-xl">
               <div className="flex items-center space-x-1 mb-1">
                 {[...Array(5)].map((_, i) => (
@@ -219,27 +255,30 @@ const About = () => {
               animate={statsControls}
               className="text-center glass-effect rounded-2xl p-6 hover:scale-105 transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-700/50"
             >
-              <div className='w-20 h-20 bg-gradient-to-r from-primary-500 to-primary-600  rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg'>
+              <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-primary-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
                 <stat.icon className="w-10 h-10 text-white" />
               </div>
-              <div className="text-3xl font-bold gradient-text mb-2">{stat.number}</div>
-              <div className="text-gray-600 dark:text-gray-400 font-medium text-sm">{stat.label}</div>
+              <div className="text-3xl font-bold gradient-text mb-2">
+                {stat.number}
+              </div>
+              <div className="text-gray-600 dark:text-gray-400 font-medium text-sm">
+                {stat.label}
+              </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Enhanced Values */}
+        {/* Values section */}
         <div className="mb-16">
           <div className="text-center mb-16">
             <h3 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              قيمنا و
-              <span className="gradient-text">مبادئنا</span>
+              قيمنا و<span className="gradient-text">مبادئنا</span>
             </h3>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
               المبادئ والقيم التي نؤمن بها ونطبقها في جميع أعمالنا ومشاريعنا
             </p>
           </div>
-          
+
           <motion.div
             ref={valuesRef}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -252,20 +291,24 @@ const About = () => {
                 animate={valuesControls}
                 className="group text-center p-8 rounded-3xl bg-gray-50 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800/70 transition-all duration-500 transform hover:scale-105 border border-gray-200 dark:border-gray-700/50 shadow-lg hover:shadow-2xl"
               >
-                <div className={`w-20 h-20 bg-gradient-to-r ${value.color} rounded-3xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                <div
+                  className={`w-20 h-20 bg-gradient-to-r ${value.color} rounded-3xl flex items-center justify-center mx-auto mb-6`}
+                >
                   <value.icon className="w-10 h-10 text-white" />
                 </div>
-                <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">{value.title}</h4>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{value.description}</p>
-                
-                {/* Progress bar */}
+                <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                  {value.title}
+                </h4>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  {value.description}
+                </p>
+
                 <div className="w-full h-1 bg-gray-200 dark:bg-gray-700 rounded-full mt-6 overflow-hidden">
                   <motion.div
                     className={`h-full bg-gradient-to-r ${value.color} rounded-full`}
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: valuesInView ? 1 : 0 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-
+                    transition={{ duration: 0.5, ease: 'easeInOut' }}
                   ></motion.div>
                 </div>
               </motion.div>

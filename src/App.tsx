@@ -17,6 +17,9 @@ import ProductDetailsPage from './pages/ProductDetailsPage';
 import LatestProducts from './components/LatestProducts';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { Toaster } from 'react-hot-toast';
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
+import NotFound from './pages/NotFound';
 
 function AppContent() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -59,7 +62,6 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/product/:id" element={<ProductDetailsPage />} />
-
           {/* صفحة لوحة التحكم */}
           <Route path="/admin" element={<AdminPanel />} />
         </Routes>

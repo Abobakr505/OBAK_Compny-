@@ -1,53 +1,56 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Filter, Grid, List } from "lucide-react";
+import { Filter, Grid, List, Search } from "lucide-react";
 import ProductCard from "../components/ProductCard";
 import { supabase } from "../lib/supabaseClient";
 import toast, { Toaster } from "react-hot-toast";
 
-const ProductGrid: React.FC = () => {
+const ProductGrid: React.FC<{ searchTerm?: string }> = ({ searchTerm = "" }) => {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("جميع الفئات");
   const [sortBy, setSortBy] = useState("name");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // Fetch categories
-        const { data: cats, error: catsError } = await supabase.from('categories').select('name');
-        if (catsError) {
-          throw new Error(`خطأ في جلب الفئات: ${catsError.message}`);
-        }
-        setCategories(cats?.map(c => c.name) || []);
 
-        // Fetch products
-        const { data: prods, error: prodsError } = await supabase.from('products').select('*');
-        if (prodsError) {
-          throw new Error(`خطأ في جلب المنتجات: ${prodsError.message}`);
-        }
+        const { data: cats, error: catsError } = await supabase.from("categories").select("name");
+        if (catsError) throw new Error(catsError.message);
+        setCategories(cats?.map((c) => c.name) || []);
+
+        const { data: prods, error: prodsError } = await supabase.from("products").select("*");
+        if (prodsError) throw new Error(prodsError.message);
         setProducts(prods || []);
       } catch (error) {
         console.error(error);
-        toast.error('حدث خطأ أثناء جلب البيانات ❌');
+        toast.error("حدث خطأ أثناء جلب البيانات ❌");
       } finally {
         setLoading(false);
       }
     };
+
     fetchData();
   }, []);
 
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = products;
 
+    // تصفية حسب الفئة
     if (selectedCategory !== "جميع الفئات") {
-      filtered = products.filter(
-        (product) => product.category === selectedCategory
+      filtered = filtered.filter((product) => product.category === selectedCategory);
+    }
+
+    // تصفية حسب البحث
+    if (searchTerm.trim() !== "") {
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
+    // ترتيب
     return filtered.sort((a, b) => {
       switch (sortBy) {
         case "price-low":
@@ -56,12 +59,11 @@ const ProductGrid: React.FC = () => {
           return b.price - a.price;
         case "rating":
           return b.rating - a.rating;
-        case "name":
         default:
           return a.name.localeCompare(b.name, "ar");
       }
     });
-  }, [selectedCategory, sortBy, products]);
+  }, [selectedCategory, sortBy, products, searchTerm]);
 
   if (loading) {
     return (
@@ -76,31 +78,10 @@ const ProductGrid: React.FC = () => {
 
   return (
     <section className="py-10 bg-gray-50 dark:bg-dark-900">
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          style: {
-            background: '#f59e0b',
-            color: '#fff',
-            fontWeight: 'bold',
-            fontSize: '16px',
-            padding: '16px 24px',
-            borderRadius: '12px',
-            textAlign: 'center',
-          },
-          success: {
-            style: {
-              background: '#059669',
-            },
-          },
-          error: {
-            style: {
-              background: '#b45309',
-            },
-          },
-        }}
-      />
+      <Toaster position="top-center" />
       <div className="container mx-auto px-4">
+
+        {/* العنوان */}
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             منتجاتنا المميزة
@@ -110,6 +91,7 @@ const ProductGrid: React.FC = () => {
           </p>
         </div>
 
+        {/* الفلاتر */}
         <div className="flex flex-col lg:flex-row gap-4 mb-10 items-center justify-between">
           <div className="flex flex-wrap gap-3">
             <button
@@ -137,6 +119,7 @@ const ProductGrid: React.FC = () => {
             ))}
           </div>
 
+          {/* الترتيب وطريقة العرض */}
           <div className="flex items-center gap-4">
             <select
               value={sortBy}
@@ -174,6 +157,7 @@ const ProductGrid: React.FC = () => {
           </div>
         </div>
 
+        {/* عرض المنتجات */}
         <div
           className={`grid gap-8 ${
             viewMode === "grid"
@@ -193,7 +177,7 @@ const ProductGrid: React.FC = () => {
               لا توجد منتجات
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              لم نجد منتجات تطابق المعايير المحددة
+              لم نجد منتجات تطابق معايير البحث أو الفلترة
             </p>
           </div>
         )}
