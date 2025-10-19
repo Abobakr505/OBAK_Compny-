@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { Filter, Grid, List, Search } from "lucide-react";
+import { Filter, Grid, List } from "lucide-react";
 import ProductCard from "../components/ProductCard";
 import { supabase } from "../lib/supabaseClient";
 import toast, { Toaster } from "react-hot-toast";

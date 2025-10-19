@@ -15,13 +15,6 @@ const fadeInUp = {
   }),
 };
 
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: (delay = 0) => ({
-    opacity: 1,
-    transition: { duration: 0.8, delay },
-  }),
-};
 
   return (
     <section className="min-h-screen bg-gray-50 dark:bg-dark-900 py-12">
