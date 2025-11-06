@@ -228,7 +228,7 @@ const About = () => {
             {/* Floating stats */}
             <div className="absolute top-8 left-8 glass-effect rounded-2xl p-4 shadow-xl">
               <div className="text-2xl font-bold gradient-text">700+</div>
-              <div className="text-sm text-white dark:text-black">مشروع</div>
+              <div className="text-sm text-white ">مشروع</div>
             </div>
 
             <div className="absolute bottom-8 right-8 glass-effect rounded-2xl p-4 shadow-xl">
@@ -237,7 +237,7 @@ const About = () => {
                   <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                 ))}
               </div>
-              <div className="text-sm text-white dark:text-black">تقييم العملاء</div>
+              <div className="text-sm text-white ">تقييم العملاء</div>
             </div>
           </motion.div>
         </div>
@@ -253,7 +253,7 @@ const About = () => {
               variants={statVariants}
               initial="hidden"
               animate={statsControls}
-              className="text-center glass-effect rounded-2xl p-6 hover:scale-105 transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-700/50"
+              className="text-center  rounded-2xl p-6 hover:scale-105 transition-all duration-300 shadow-lg border border-gray-200 dark:border-gray-700/50"
             >
               <div className="w-20 h-20 bg-gradient-to-r from-primary-500 to-primary-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
                 <stat.icon className="w-10 h-10 text-white" />
@@ -289,7 +289,7 @@ const About = () => {
                 variants={valueVariants}
                 initial="hidden"
                 animate={valuesControls}
-                className="group text-center p-8 rounded-3xl bg-gray-50 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800/70 transition-all duration-500 transform hover:scale-105 border border-gray-200 dark:border-gray-700/50 shadow-lg hover:shadow-2xl"
+                className="group text-center p-8 rounded-3xl bg-gray-50 dark:bg-gray-800/50 backdrop-blur-sm hover:bg-white dark:hover:bg-gray-800/70 transition-all duration-500 transform hover:scale-105 border border-gray-200 dark:border-gray-700/50 shadow-lg hover:shadow-2xl "
               >
                 <div
                   className={`w-20 h-20 bg-gradient-to-r ${value.color} rounded-3xl flex items-center justify-center mx-auto mb-6`}

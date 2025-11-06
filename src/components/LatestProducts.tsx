@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ProductCard from "./ProductCard";
-import { ArrowRight, HelpCircle } from "lucide-react";
+import { ArrowRight, HelpCircle , FunnelX } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 
@@ -59,6 +59,7 @@ const LatestProducts: React.FC = () => {
       </div>
       ) : latestProducts.length === 0 ? (
         <div className="text-center py-8">
+          <FunnelX className="w-12 h-12 mx-auto text-gray-400 dark:text-gray-600 mb-4" />
           <p className="text-gray-600 dark:text-gray-400">لا توجد منتجات جديدة حاليًا</p>
         </div>
       ) : (
