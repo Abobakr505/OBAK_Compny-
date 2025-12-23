@@ -173,12 +173,12 @@ const Footer: React.FC = () => {
             <span>من</span>
             <span className="bracket text-primary-400 dark:text-primary-600">{"<"}</span>
             <a
-              href="https://bakrhasan.netlify.app/"
+              href="https://yasuruha.netlify.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary-600 dark:text-primary-400 hover:underline"
             >
-              أبوبكر حسن
+             يسِّرها
             </a>
             <span className="bracket text-primary-400 dark:text-primary-600">{">"}</span>
           </p>
